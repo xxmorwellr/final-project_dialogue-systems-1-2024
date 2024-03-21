@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>24 POINTS</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<script src="https://lib.baomitu.com/element-ui/2.13.2/index.js"></script>
+    <script src="./Tairraos-Poker.JS/release/poker.min.js"></script>
+    <script type="module" src="/main.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <el-container>
+				<el-header>
+					<h1 class="title">Welcome to 24 POINTS!</h1> 
+				</el-header>
+        
+				<el-main>
+          <div class="main">
+           <div class="main-content">
+            <div id="gameIntro" style="text-align: left;">
+              <h3>You will be given 4 random cards from 1 to 9, and three entry levels vary.</h3>
+              <h3>You can use <span class="highlight">+</span> <span class="highlight">-</span> <span class="highlight">x</span> <span class="highlight">/</span> to generate a result of 24, and each card should only be used once.</h3>
+              <h3>Decimal, fraction or negative number can appear during operations.</h3>
+              <h3>Also, a timer will be set according to your chosen level.</h3>
+            </div>
+
+              <!-- Calculation formula -->
+            <div id="resultDisplay" class="hidden" style="display: flex; align-items: center;">
+              <h5 style="margin-right: 10px;">YOUR RESULT:</h5>
+              <el-card shadow="always">
+                {{ result }}
+              </el-card>
+            </div>
+          
+            
+            <!-- Random numbers (poker cards) -->
+            <el-row :gutter="20">
+              <div id="cardModule" class="hidden">
+                <el-col :span="3">
+                    <div class="card-sep">
+                        <canvas id="cardCanvas_0" width="200" height="200" @click="getVal(randomNum[0], 0)"></canvas>
+                    </div>
+                </el-col>
+                <el-col :span="3">
+                    <div class="card-sep">
+                        <canvas id="cardCanvas_1" width="200" height="200" @click="getVal(randomNum[1], 1)"></canvas>
+                    </div>
+                </el-col>
+                <el-col :span="3">
+                    <div class="card-sep">
+                        <canvas id="cardCanvas_2" width="200" height="200" @click="getVal(randomNum[2], 2)"></canvas>
+                    </div>
+                </el-col>
+                <el-col :span="3">
+                    <div class="card-sep">
+                        <canvas id="cardCanvas_3" width="200" height="200" @click="getVal(randomNum[3], 3)"></canvas>
+                    </div>
+                </el-col>
+              </div>
+            </el-row>          
+
+            <!-- Operator selection -->
+            <div id="operatorModule" class="hidden" style="display: flex; align-items: center;">
+              <h5 style="margin-right: 10px;">OPERATOR SELECTION:</h5>
+              <el-row :gutter="20" class="h-sep"> 
+                <el-col :span="6"><el-button type="default" plain icon="el-icon-plus" @click="add"></el-button></el-col>
+                <el-col :span="6"><el-button type="default" plain icon="el-icon-minus" @click='inc'></el-button></el-col>
+                <el-col :span="6"><el-button type="default" plain icon="el-icon-close" @click='mul'></el-button></el-col>
+                <el-col :span="6"><el-button type="default" plain icon="" @click='div'>/&nbsp;&nbsp;</el-button></el-col>
+                <el-col :span="6"><el-button type="default" plain icon="" @click='left'>(</el-button></el-col>
+                <el-col :span="6"><el-button type="default" plain icon="" @click='right'>)</el-button></el-col>
+              </el-row>
+            </div>
+
+            <!-- Function selection -->
+            <div id="settingModule" class="hidden" style="display: flex; align-items: center;">
+              <h5 style="margin-right: 10px;">TOP SETTINGS:</h5>
+              <el-row :gutter="40" class="footBtn">
+                <el-col :span="4" style="margin-right: 20px;"><el-button type="default" round plain @click='clean' style="display: flex; justify-content: center;"><i class="el-icon-refresh-left" style="margin-right: 3px;"></i>Clean</el-button></el-col> 
+                <el-col :span="4" style="margin-right: 20px;"><el-button type="default" round plain @click='confirm' style="display: flex; justify-content: center;"><i class="el-icon-success" style="margin-right: 3px;"></i>Confirm</el-button></el-col>                
+                <el-col :span="4" style="margin-right: 20px;"><el-button type="default" round plain @click='resert' style="display: flex; justify-content: center;"><i class="el-icon-refresh" style="margin-right: 3px;"></i>Change</el-button></el-col>                
+                <el-col :span="4" style="margin-right: 20px;"><el-button type="default" round plain @click='hint' style="display: flex; justify-content: center;"><i class="el-icon-magic-stick" style="margin-right: 3px;"></i>Hint</el-button></el-col>                
+              </el-row>
+            </div>
+
+            <!-- Timer -->
+            <div id="countdown" class="hidden" style="position: absolute; top: 30; right: 30;">
+            </div>
+					
+            <div class="card" style="position: relative;">
+              <div id="ruready" style="text-align: center;">
+                <h3>Start Game!</h3>
+              </div>
+              <button id="easyButton" type="button">Easy</button>
+              <button id="midButton" type="button">Medium</button>
+              <button id="hardButton" type="button">Hard</button>
+              </div>
+            </div>
+
+            <div class="main-pic">
+                <img src="/pics/back_small.png" id="decorative-image">
+            </div>
+          </div>
+        </el-main>
+      </el-container>
+
+    </div>
+  </body>
+</html>
