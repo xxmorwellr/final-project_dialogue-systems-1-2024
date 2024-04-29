@@ -19,4 +19,4 @@ Azure service for ASR&TTS&NLU<br>
   - CSS<br>
     style.css – define the styling rules for HTML elements
 
-Besides, you can see a brief in the .pdf file.
+Besides, you can see a brief [here](24_POINTS.pdf).
