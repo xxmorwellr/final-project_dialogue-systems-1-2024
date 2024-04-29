@@ -1,4 +1,4 @@
-**Welcome to 24 POINTs!**
+# Welcome to 24 POINTs!
 
 It's my final project for the master course *Dialogue System 1*, and It's a card game with dialogue-driven interaction.
 
